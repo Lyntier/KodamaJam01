@@ -3,6 +3,7 @@
 namespace Alice.Components
 {
     [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(Animator))]
     public class Player : MonoBehaviour
     {
         public float maxSlopeAngle = 80;
@@ -10,12 +11,21 @@ namespace Alice.Components
         public CollisionInfo collisions;
         [HideInInspector] public Vector2 playerInput;
 
+        [SerializeField] float attackDelay;
+        float _currentAttackDelay;
+
+        Animator _animator;
+        
+        static readonly int AttackTrigger = Animator.StringToHash("Attack");
+
         void Start()
         {
             _gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
             _maxJumpVelocity = Mathf.Abs(_gravity) * timeToJumpApex;
             _minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(_gravity) * minJumpHeight);
 
+            _animator = GetComponent<Animator>();
+            
             CalculateRaySpacing();
             collisions.FaceDir = 1;
         }
@@ -27,6 +37,7 @@ namespace Alice.Components
             _directionalInput.x = Input.GetAxisRaw("Horizontal");
             if (Input.GetKeyDown(KeyCode.Space)) OnJumpInputDown();
             if (Input.GetKeyUp(KeyCode.Space)) OnJumpInputUp();
+            PerformAttack();
 
             Move(_velocity * Time.deltaTime, _directionalInput);
 
@@ -40,6 +51,19 @@ namespace Alice.Components
                 {
                     _velocity.y = 0;
                 }
+            }
+        }
+
+        void PerformAttack()
+        {
+            if (_currentAttackDelay > Time.deltaTime)
+            {
+                _currentAttackDelay -= Time.deltaTime;
+                
+            } else if (Input.GetKeyDown(KeyCode.E))
+            {
+                _currentAttackDelay = attackDelay;
+                _animator.SetTrigger(AttackTrigger);
             }
         }
 
@@ -72,7 +96,7 @@ namespace Alice.Components
                 VerticalCollisions(ref moveAmount);
             }
 
-            transform.Translate(moveAmount);
+            transform.Translate(moveAmount, Space.World);
 
             if (standingOnPlatform)
             {
@@ -83,6 +107,8 @@ namespace Alice.Components
         void HorizontalCollisions(ref Vector2 moveAmount)
         {
             float directionX = collisions.FaceDir;
+            if(directionX < 0) transform.rotation = Quaternion.Euler(0, 180, 0);
+            if (directionX > 0) transform.rotation = Quaternion.identity;
             float rayLength = Mathf.Abs(moveAmount.x) + SkinWidth;
 
             if (Mathf.Abs(moveAmount.x) < SkinWidth)
