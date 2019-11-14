@@ -6,6 +6,8 @@ namespace Alice.Components
     [RequireComponent(typeof(Animator))]
     public class Player : MonoBehaviour
     {
+        public Vector3 Velocity => _velocity;
+        
         public float maxSlopeAngle = 80;
 
         public CollisionInfo collisions;
@@ -34,7 +36,23 @@ namespace Alice.Components
         {
             CalculateVelocity();
 
-            _directionalInput.x = Input.GetAxisRaw("Horizontal");
+            // Input axes are not saved between scene switches.
+            // To circumvent this, we have to use Input.GetKeyDown directly.
+            
+            // _directionalInput.x = Input.GetAxisRaw("Horizontal");
+            _directionalInput.x = 0;
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            {
+                _directionalInput.x -= 1;
+            }
+
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                _directionalInput.x += 1;
+            }
+            
+            Debug.Log(_directionalInput.x);
+            
             if (Input.GetKeyDown(KeyCode.Space)) OnJumpInputDown();
             if (Input.GetKeyUp(KeyCode.Space)) OnJumpInputUp();
             PerformAttack();
