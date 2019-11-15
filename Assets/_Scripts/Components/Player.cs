@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Runtime.InteropServices;
+using UnityEngine;
 
 namespace Alice.Components
 {
@@ -6,7 +7,15 @@ namespace Alice.Components
     [RequireComponent(typeof(Animator))]
     public class Player : MonoBehaviour
     {
+        // I actually have to do this because the Unity devs are a bunch of 
+        [DllImport("user32.dll")]
+        public static extern short GetAsyncKeyState(int vkey);
+
+        public const int LEFT_ARROW_KEY = 0x25;
+        public const int RIGHT_ARROW_KEY = 0x27;
+        
         public Vector3 Velocity => _velocity;
+
         
         public float maxSlopeAngle = 80;
 
@@ -36,22 +45,22 @@ namespace Alice.Components
         {
             CalculateVelocity();
 
+
             // Input axes are not saved between scene switches.
             // To circumvent this, we have to use Input.GetKeyDown directly.
             
             // _directionalInput.x = Input.GetAxisRaw("Horizontal");
             _directionalInput.x = 0;
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            if ((GetAsyncKeyState(LEFT_ARROW_KEY) & 0x8000) > 0)
             {
                 _directionalInput.x -= 1;
             }
 
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            if ((GetAsyncKeyState(RIGHT_ARROW_KEY) & 0x8000) > 0)
             {
                 _directionalInput.x += 1;
             }
             
-            Debug.Log(_directionalInput.x);
             
             if (Input.GetKeyDown(KeyCode.Space)) OnJumpInputDown();
             if (Input.GetKeyUp(KeyCode.Space)) OnJumpInputUp();

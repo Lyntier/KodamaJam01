@@ -11,7 +11,7 @@ namespace Alice
         [SerializeField] Animator transitionPanelAnim;
         static readonly int FadeOutTrigger = Animator.StringToHash("FadeOut");
         static readonly int FadeInTrigger = Animator.StringToHash("FadeIn");
-        
+
 
         string _levelExit;
 
@@ -26,6 +26,7 @@ namespace Alice
             // Do it again here.
             
             SetCinemachineConfines();
+            
         }
 
         public void LoadScene(string sceneName, string levelExit)
@@ -35,6 +36,7 @@ namespace Alice
 
         IEnumerator Transition(string sceneName, string levelExit)
         {
+            
             // Store reference to level exit for player positioning later
             _levelExit = levelExit;
 
@@ -64,7 +66,10 @@ namespace Alice
             
             player.transform.position = spawn;
             
+            
             SetCinemachineConfines();
+            
+
         }
 
         void SetCinemachineConfines()
@@ -76,6 +81,7 @@ namespace Alice
             // Cinemachine doesn't automatically update performance path.
             // This makes sure the path is updated.
             confiner.InvalidatePathCache();
+            
         }
     }
 }
