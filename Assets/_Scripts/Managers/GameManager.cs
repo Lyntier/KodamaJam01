@@ -43,7 +43,8 @@ namespace Alice.Managers
         IEnumerator Transition(string sceneName, string levelExit, string transitionName, bool shouldAudioFade)
         {
             if (transitionName.Equals("")) transitionName = "Fade";
-            float transitionTime = 1f;
+            float transitionTime = 5f;
+            transitionPanelAnim.speed = 1f / transitionTime;
 
             // Store reference to level exit for player positioning later
             _levelExit = levelExit;

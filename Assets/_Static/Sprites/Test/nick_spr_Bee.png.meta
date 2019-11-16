@@ -1,7 +1,31 @@
 fileFormatVersion: 2
 guid: 529239dc981bfce4d98fbfefcec632a1
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2250368445709245633
+    second: nick_spr_Bee_0
+  - first:
+      213: -4929744383594015046
+    second: nick_spr_Bee_1
+  - first:
+      213: -2791477703138902196
+    second: nick_spr_Bee_2
+  - first:
+      213: -4418602953118663756
+    second: nick_spr_Bee_3
+  - first:
+      213: 3471493223304507425
+    second: nick_spr_Bee_4
+  - first:
+      213: 2489108346766178046
+    second: nick_spr_Bee_5
+  - first:
+      213: -775002150610765162
+    second: nick_spr_Bee_6
+  - first:
+      213: 4018450093106229117
+    second: nick_spr_Bee_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +64,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -84,7 +108,175 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: nick_spr_Bee_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 5
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e671c6036ed7a974a812009636c08e56
+      internalID: 2250368445709245633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nick_spr_Bee_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 5
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 116c6e00493151b4896759d5c54b3bce
+      internalID: -4929744383594015046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nick_spr_Bee_2
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 5
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11df22d42d46d2b49a72e5e939104724
+      internalID: -2791477703138902196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nick_spr_Bee_3
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 5
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c087e74954206344b0a564919988bb6
+      internalID: -4418602953118663756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nick_spr_Bee_4
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 5
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b7862529f012204086b6e453c63585b
+      internalID: 3471493223304507425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nick_spr_Bee_5
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 5
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f23131116ab08ad4c80596492c988094
+      internalID: 2489108346766178046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nick_spr_Bee_6
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 5
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e438bfb26acdae49bea5fc2cab8d532
+      internalID: -775002150610765162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nick_spr_Bee_7
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 5
+        width: 27
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79b62b4cfa293a548ab0991c5cc1d872
+      internalID: 4018450093106229117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
