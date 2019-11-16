@@ -8,12 +8,15 @@ namespace Alice.Managers
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] Animator transitionPanelAnim;
+        [SerializeField] Animator transitionPanelAnim = null;
 
         string _levelExit;
 
         SceneDataContainer _sceneData;
         AudioManager _audioManager;
+
+        bool _shouldAudioFade;
+        float _transitionTime;
         
         void Awake()
         {
@@ -58,13 +61,17 @@ namespace Alice.Managers
             
             transitionPanelAnim.SetTrigger(transitionName + "In");
 
-            _sceneData = FindObjectOfType<SceneDataContainer>();
-            if(_sceneData.backgroundAudio && shouldAudioFade) _audioManager.FadeIn(transitionTime);
+            // Audio load happens in SceneLoaded because it will otherwise grab the old data.
+            _shouldAudioFade = shouldAudioFade;
+            _transitionTime = transitionTime;
         }
 
         void SceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (_levelExit == null) return; // Probably entering from preload.
+
+            _sceneData = FindObjectOfType<SceneDataContainer>();
+            if(_sceneData.backgroundAudio && _shouldAudioFade) _audioManager.FadeIn(_transitionTime);
             
             Player player = FindObjectOfType<Player>();
             GameObject refExit = GameObject.Find(_levelExit);

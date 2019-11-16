@@ -16,11 +16,11 @@ namespace Alice
 
         // Needed to check whether player is moving
         // in to or out of the level.
-        [SerializeField] Vector2Int side;
-        [SerializeField] SceneField referencingScene;
-        [SerializeField] string towardsLevelExit;
-        [SerializeField] bool shouldAudioFade;
-        [SerializeField] string transitionName;
+        [SerializeField] Vector2Int side = Vector2Int.zero;
+        [SerializeField] SceneField referencingScene = null;
+        [SerializeField] string towardsLevelExit = "";
+        [SerializeField] bool shouldAudioFade = false;
+        [SerializeField] string transitionName = "Fade";
         bool _isGameManagerNull = true;
 
         // Position at which player is spawned when

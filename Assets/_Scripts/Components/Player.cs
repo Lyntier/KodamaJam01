@@ -22,7 +22,7 @@ namespace Alice.Components
         public CollisionInfo collisions;
         [HideInInspector] public Vector2 playerInput;
 
-        [SerializeField] float attackDelay;
+        [SerializeField] float attackDelay = 0.5f;
         float _currentAttackDelay;
 
         Animator _animator;

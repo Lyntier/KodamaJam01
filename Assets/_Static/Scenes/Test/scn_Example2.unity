@@ -1573,7 +1573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab7bff3c39ba034d92fc8579d1d5c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundAudio: {fileID: 8300000, guid: 6ae2de7a32c8f6546bdd4dad88093092, type: 3}
+  backgroundAudio: {fileID: 8300000, guid: d8ffaa697ccfba6419f96ee3fe1faacb, type: 3}
 --- !u!4 &1992123351
 Transform:
   m_ObjectHideFlags: 0
