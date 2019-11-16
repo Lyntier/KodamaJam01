@@ -1,6 +1,7 @@
 ﻿using System;
 using Alice.Components;
 using Alice.Ext;
+using Alice.Managers;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -18,6 +19,8 @@ namespace Alice
         [SerializeField] Vector2Int side;
         [SerializeField] SceneField referencingScene;
         [SerializeField] string towardsLevelExit;
+        [SerializeField] bool shouldAudioFade;
+        [SerializeField] string transitionName;
         bool _isGameManagerNull = true;
 
         // Position at which player is spawned when
@@ -55,7 +58,7 @@ namespace Alice
             if (side.y == 0)
             {
                 if (playerDir.x == side.x)
-                    _gameManager.LoadScene(referencingScene, towardsLevelExit);
+                    _gameManager.LoadScene(referencingScene, towardsLevelExit, transitionName, shouldAudioFade);
             }
         }
     }

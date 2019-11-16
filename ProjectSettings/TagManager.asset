@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CameraBoundingBox
   - CinemachineCamera
+  - AudioManager
   layers:
   - Default
   - TransparentFX
