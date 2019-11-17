@@ -21,6 +21,7 @@ namespace Alice
         [SerializeField] string towardsLevelExit = "";
         [SerializeField] bool shouldAudioFade = false;
         [SerializeField] string transitionName = "Fade";
+        [SerializeField] float transitionTime = 1f;
         bool _isGameManagerNull = true;
 
         // Position at which player is spawned when
@@ -58,7 +59,7 @@ namespace Alice
             if (side.y == 0)
             {
                 if (playerDir.x == side.x)
-                    _gameManager.LoadScene(referencingScene, towardsLevelExit, transitionName, shouldAudioFade);
+                    _gameManager.LoadScene(referencingScene, towardsLevelExit, transitionName, transitionTime, shouldAudioFade);
             }
         }
     }

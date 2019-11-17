@@ -35,16 +35,15 @@ namespace Alice.Managers
 
 
 
-        public void LoadScene(string sceneName, string levelExit, string transitionName, bool shouldAudioFade = false)
+        public void LoadScene(string sceneName, string levelExit, string transitionName, float transitionTime = 1f, bool shouldAudioFade = false)
         {
-            StartCoroutine(Transition(sceneName, levelExit, transitionName, shouldAudioFade)); 
+            StartCoroutine(Transition(sceneName, levelExit, transitionName, transitionTime, shouldAudioFade)); 
         }
 
-        IEnumerator Transition(string sceneName, string levelExit, string transitionName, bool shouldAudioFade)
+        IEnumerator Transition(string sceneName, string levelExit, string transitionName, float transitionTime, bool shouldAudioFade)
         {
             if (transitionName.Equals("")) transitionName = "Fade";
-            float transitionTime = 5f;
-            transitionPanelAnim.speed = 1f / transitionTime;
+            transitionPanelAnim.speed = 1f / (transitionTime);
 
             // Store reference to level exit for player positioning later
             _levelExit = levelExit;
