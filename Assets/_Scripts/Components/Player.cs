@@ -112,10 +112,16 @@ namespace Alice.Components
                 DescendSlope(ref moveAmount);
             }
 
-            if (moveAmount.x != 0)
+            if (Mathf.Abs(moveAmount.x) > 0.01f)
             {
                 collisions.FaceDir = (int) Mathf.Sign(moveAmount.x);
+                _animator.SetBool(Mov, true);
             }
+            else
+            {
+                _animator.SetBool(Mov, false);
+            }
+            
 
             HorizontalCollisions(ref moveAmount);
             if (moveAmount.y != 0)
@@ -426,6 +432,7 @@ namespace Alice.Components
         Vector2 _directionalInput;
         bool _wallSliding;
         int _wallDirX;
+        static readonly int Mov = Animator.StringToHash("Mov");
 
 
         public void OnJumpInputDown()

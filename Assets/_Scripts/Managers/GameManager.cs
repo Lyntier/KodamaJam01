@@ -51,7 +51,7 @@ namespace Alice.Managers
             // Execute transition
             transitionPanelAnim.SetTrigger(transitionName + "Out");
             
-            if(_sceneData.backgroundAudio && shouldAudioFade) _audioManager.FadeOut(transitionTime);
+            if(_audioManager && _sceneData.backgroundAudio && shouldAudioFade) _audioManager.FadeOut(transitionTime);
 
             // Wait for transition to finish
             yield return new WaitForSeconds(transitionTime);
@@ -71,7 +71,7 @@ namespace Alice.Managers
             if (_levelExit == null) return; // Probably entering from preload.
 
             _sceneData = FindObjectOfType<SceneDataContainer>();
-            if(_sceneData.backgroundAudio && _shouldAudioFade) _audioManager.FadeIn(_transitionTime);
+            if(_audioManager && _sceneData.backgroundAudio && _shouldAudioFade) _audioManager.FadeIn(_transitionTime);
             
             Player player = FindObjectOfType<Player>();
             GameObject refExit = GameObject.Find(_levelExit);
@@ -79,7 +79,7 @@ namespace Alice.Managers
             Vector2 spawn = refExit.GetComponent<LevelExit>().PlayerSpawn;
             
             // Make sure player doesn't spawn inside ground.
-            spawn.y += player.GetComponent<Collider2D>().bounds.size.y / 2f;
+            spawn.y += player.GetComponent<Collider2D>().bounds.size.y / 1.5f;
             
             player.transform.position = spawn;
             
