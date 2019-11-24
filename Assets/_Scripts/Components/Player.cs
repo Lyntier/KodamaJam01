@@ -13,10 +13,10 @@ namespace Alice.Components
 
         public const int LEFT_ARROW_KEY = 0x25;
         public const int RIGHT_ARROW_KEY = 0x27;
-        
+
         public Vector3 Velocity => _velocity;
 
-        
+
         public float maxSlopeAngle = 80;
 
         public CollisionInfo collisions;
@@ -26,7 +26,7 @@ namespace Alice.Components
         float _currentAttackDelay;
 
         Animator _animator;
-        
+
         static readonly int AttackTrigger = Animator.StringToHash("Attack");
 
         void Start()
@@ -36,7 +36,7 @@ namespace Alice.Components
             _minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(_gravity) * minJumpHeight);
 
             _animator = GetComponent<Animator>();
-            
+
             CalculateRaySpacing();
             collisions.FaceDir = 1;
         }
@@ -48,7 +48,7 @@ namespace Alice.Components
 
             // Input axes are not saved between scene switches.
             // To circumvent this, we have to use Input.GetKeyDown directly.
-            
+
             // _directionalInput.x = Input.GetAxisRaw("Horizontal");
             _directionalInput.x = 0;
             if ((GetAsyncKeyState(LEFT_ARROW_KEY) & 0x8000) > 0)
@@ -60,8 +60,8 @@ namespace Alice.Components
             {
                 _directionalInput.x += 1;
             }
-            
-            
+
+
             if (Input.GetKeyDown(KeyCode.Space)) OnJumpInputDown();
             if (Input.GetKeyUp(KeyCode.Space)) OnJumpInputUp();
             PerformAttack();
@@ -86,8 +86,8 @@ namespace Alice.Components
             if (_currentAttackDelay > Time.deltaTime)
             {
                 _currentAttackDelay -= Time.deltaTime;
-                
-            } else if (Input.GetKeyDown(KeyCode.E))
+            }
+            else if (Input.GetKeyDown(KeyCode.E))
             {
                 _currentAttackDelay = attackDelay;
                 _animator.SetTrigger(AttackTrigger);
@@ -121,12 +121,20 @@ namespace Alice.Components
             {
                 _animator.SetBool(Mov, false);
             }
-            
+
 
             HorizontalCollisions(ref moveAmount);
             if (moveAmount.y != 0)
             {
                 VerticalCollisions(ref moveAmount);
+                if (collisions.ClimbingSlope || collisions.DescendingSlope || Mathf.Abs(moveAmount.y) < 0.01f)
+                {
+                    _animator.SetFloat(MovY, 0f);
+                }
+                else
+                {
+                    _animator.SetFloat(MovY, moveAmount.y);
+                }
             }
 
             transform.Translate(moveAmount, Space.World);
@@ -140,7 +148,7 @@ namespace Alice.Components
         void HorizontalCollisions(ref Vector2 moveAmount)
         {
             float directionX = collisions.FaceDir;
-            if(directionX < 0) transform.rotation = Quaternion.Euler(0, 180, 0);
+            if (directionX < 0) transform.rotation = Quaternion.Euler(0, 180, 0);
             if (directionX > 0) transform.rotation = Quaternion.identity;
             float rayLength = Mathf.Abs(moveAmount.x) + SkinWidth;
 
@@ -293,7 +301,8 @@ namespace Alice.Components
                     {
                         if (Mathf.Sign(hit.normal.x) == directionX)
                         {
-                            if (hit.distance - SkinWidth <= Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(moveAmount.x))
+                            if (hit.distance - SkinWidth <=
+                                Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(moveAmount.x))
                             {
                                 float moveDistance = Mathf.Abs(moveAmount.x);
                                 float descendMoveAmountY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
@@ -433,6 +442,7 @@ namespace Alice.Components
         bool _wallSliding;
         int _wallDirX;
         static readonly int Mov = Animator.StringToHash("Mov");
+        static readonly int MovY = Animator.StringToHash("MovY");
 
 
         public void OnJumpInputDown()
